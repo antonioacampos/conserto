@@ -1,4 +1,4 @@
-package com.example.oficina;
+package com.example.conserto;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

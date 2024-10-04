@@ -1,7 +1,8 @@
-package com.example.oficina.controller;
+package com.example.conserto.controller;
 
-import com.example.oficina.Conserto;
-import com.example.oficina.ConsertoRepository;
+import com.example.conserto.Conserto;
+import com.example.conserto.ConsertoRepository;
+import com.example.conserto.DadosConserto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,8 @@ public class ConsertoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody Conserto conserto) {
-        repository.save(conserto);
+    public void cadastrar(@RequestBody DadosConserto conserto) {
+        repository.save(new Conserto(conserto));
     }
 
     @GetMapping

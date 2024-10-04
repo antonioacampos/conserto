@@ -1,4 +1,4 @@
-package com.example.oficina;
+package com.example.conserto;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

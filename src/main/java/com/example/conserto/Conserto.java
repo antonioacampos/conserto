@@ -1,4 +1,4 @@
-package com.example.oficina;
+package com.example.conserto;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,5 +24,12 @@ public class Conserto {
 
     @Embedded
     private Veiculo veiculo;
+    public Conserto(DadosConserto dados){
+        this.id=dados.id();
+        this.dataEntrada= dados.dataEntrada();
+        this.dataSaida=dados.dataSaida();
+        this.veiculo=dados.veiculo();
+        this.mecanico=dados.mecanico();
+    }
 }
 
