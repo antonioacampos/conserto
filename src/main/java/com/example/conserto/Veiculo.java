@@ -4,6 +4,8 @@ import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 
 @Embeddable
@@ -11,7 +13,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Veiculo {
+    @NotBlank(message = "A marca do veículo é obrigatória")
     private String marca;
+
+    @NotBlank(message = "o modelo do veículo é obrigatório")
     private String modelo;
+
+    @Pattern(regexp = "\\d{4}", message = "O ano do veículo deve estar no formato 'xxxx'")
     private String ano;
+
+    private String cor;
 }

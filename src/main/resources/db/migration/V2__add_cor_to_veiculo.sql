@@ -1,0 +1,1 @@
+ALTER TABLE conserto ADD COLUMN cor VARCHAR(255);

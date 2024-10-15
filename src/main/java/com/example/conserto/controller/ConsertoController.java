@@ -4,6 +4,8 @@ import com.example.conserto.Conserto;
 import com.example.conserto.ConsertoRepository;
 import com.example.conserto.DadosConserto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.transaction.Transactional;
@@ -24,8 +26,8 @@ public class ConsertoController {
     }
 
     @GetMapping
-    public List<Conserto> listarTodos() {
-        return repository.findAll();
+    public Page<Conserto> listarTodos(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }
 
