@@ -1,4 +1,18 @@
 package com.example.conserto;
 
-public record DadosMecanico(String nome, int anosDeExperiencia) {
+import jakarta.validation.constraints.NotBlank;
+
+public record DadosMecanico(
+        @NotBlank(message = "Nome do mecânico é obrigatório")
+        String nome,
+
+        int anosDeExperiencia
+) {
+        public DadosMecanico (Mecanico mecanico)
+        {
+                this(
+                        mecanico.getNome(),
+                        mecanico.getAnosDeExperiencia()
+                );
+        }
 }
