@@ -14,5 +14,10 @@ public class Mecanico {
     @NotBlank(message = "Nome do mecânico é obrigatório")
     private String nome;
     private int anosDeExperiencia;
+    public Mecanico(DadosMecanico dados){
+        this.nome= dados.nome();
+        this.anosDeExperiencia=dados.anosDeExperiencia();
+
+    }
 }
 
