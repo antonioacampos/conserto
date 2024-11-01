@@ -21,10 +21,7 @@ public class Conserto {
     @NotNull
     private boolean ativo;
 
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "'data de entrada' deve estar no formato 'xx/xx/xxxx'")
     private String dataEntrada;
-
-    @Pattern(regexp = "\\d{2}/\\d{2}/\\d{4}", message = "'data de saída' deve estar no formato 'xx/xx/xxxx'")
     private String dataSaida;
 
     @Embedded
