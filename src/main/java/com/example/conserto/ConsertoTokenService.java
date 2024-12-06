@@ -1,6 +1,6 @@
-package br.edu.ifsp.prw3.api_2024_2.util.security;
+package com.example.conserto;
 
-import br.edu.ifsp.prw3.api_2024_2.usuario.Usuario;
+import com.example.conserto.usuario.Usuario;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -37,14 +37,12 @@ public class ConsertoTokenService {
         }
     }
 
-
-    // Valida o token, e recupera o subject (login) dentro do token:
     public String getSubject(String tokenJWT) {
 
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             JWTVerifier jwtv = JWT.require(algoritmo)
-                    .withIssuer("DISCIPLINA PW3")
+                    .withIssuer("OFICINA")
                     .build();
             return jwtv.verify(tokenJWT).getSubject();
 

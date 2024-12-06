@@ -1,6 +1,6 @@
 package com.example.conserto;
 
-import br.edu.ifsp.prw3.api_2024_2.usuario.UsuarioRepository;
+import com.example.conserto.usuario.UsuarioRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ import java.io.IOException;
 public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
-    private PW3TokenService pw3tokenservice;
+    private ConsertoTokenService consertoTokenService;
 
     @Autowired
     private UsuarioRepository repository;
@@ -26,27 +26,21 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-
-        // Recuperando o cabeçalho Authorization (o token JWT):
         var authorizationHeader = request.getHeader("Authorization");
 
-        // Lembrando: /login não envia cabeçalho authorization!
-        // Se o JWT foi enviado...
         if (authorizationHeader != null) {
-            // Tira o 'Bearer':
             authorizationHeader = authorizationHeader.replace("Bearer ", "");
-            // Chamar o método que valida o token, e recupera o login:
-            var subject = pw3tokenservice.getSubject(authorizationHeader);
-            // Carrega o usuário com esse login do BD:
+
+            var subject = consertoTokenService.getSubject(authorizationHeader);
+
             var usuario = repository.findByLogin(subject);
-            // Cria um objeto Authentication que representa a identidade de um usuário autenticado.
-            // Ele contém as informações do usuário, como o nome de usuário, a senha e as permissões.
+
             var authentication = new UsernamePasswordAuthenticationToken(usuario, null,
                     usuario.getAuthorities());
-            // Finalmente, manda o Spring AUTENTICAR esse usuário:
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-        // Para executar o próximo filtro, ou seguir o processamento:
+
         filterChain.doFilter(request, response);
     }
 }

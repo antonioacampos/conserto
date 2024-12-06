@@ -1,9 +1,9 @@
 package com.example.conserto.controller;
 
-import br.edu.ifsp.prw3.api_2024_2.usuario.Usuario;
-import br.edu.ifsp.prw3.api_2024_2.usuario.dadosAutenticacao;
-import br.edu.ifsp.prw3.api_2024_2.util.security.DadosTokenJWT;
-import br.edu.ifsp.prw3.api_2024_2.util.security.PW3TokenService;
+import com.example.conserto.usuario.Usuario;
+import com.example.conserto.usuario.dadosAutenticacao;
+import com.example.conserto.DadosTokenJWT;
+import com.example.conserto.ConsertoTokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,10 +20,9 @@ public class AutenticacaoController {
 
     @Autowired
     private AuthenticationManager manager;
-    // que será injetado aqui.
 
     @Autowired
-    private PW3TokenService tokenService;
+    private ConsertoTokenService tokenService;
 
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid dadosAutenticacao dados) {
@@ -33,11 +32,8 @@ public class AutenticacaoController {
 
         var authentication = manager.authenticate(token);
 
-        // Criando o token JWT:
         var tokenJWT = tokenService.gerarToken( (Usuario) authentication.getPrincipal() );
 
-        // Criando o DTO DadosTokenJWT a partir do token criado acima,
-        // e devolvendo no corpo da respostas da requisição:
         return ResponseEntity.ok( new DadosTokenJWT(tokenJWT) );
 
     }
